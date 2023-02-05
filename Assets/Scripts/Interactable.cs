@@ -11,6 +11,23 @@ public class Interactable : MonoBehaviour
 
     private Material original;
 
+    private bool allowInteraction = true;
+
+    public bool AllowInteraction 
+    {
+        get => allowInteraction;
+        set
+        {
+            if (allowInteraction != value)
+            {
+                allowInteraction = value;
+                if (allowInteraction == false)
+                {
+                    renderer.material = original;
+                }
+            }
+        }
+    }
     public virtual void OnFocus()
     {
         Debug.Log("Interactable.OnFocus()");
@@ -26,6 +43,11 @@ public class Interactable : MonoBehaviour
     public virtual void OnInteract()
     {
         Debug.Log("Interactable.OnInteract()");
+    }
+
+    public virtual void OnConfirm()
+    {
+        Debug.Log("Interactable.OnConfirm()");
     }
 
     private void Awake()

@@ -5,18 +5,19 @@ using UnityEngine;
 public class DoorInteractable : Interactable
 {
     // TODO: Implement player inventory check
-    private bool hasKey = true;
+    private bool hasKey = false;
 
     public override void OnInteract()
     {
         base.OnInteract();
+        WindowManager windowManager = WindowManager.Instance;
         if (!hasKey)
         {
-            WindowManager.Instance.ToggleNeedKey();
+            windowManager.Open(windowManager.NeedKey, this);
         }
         else
         {
-            WindowManager.Instance.ToogleOpenDoor();
+            windowManager.Open(windowManager.OpenConfirm, this);
         }
     }
 }

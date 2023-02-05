@@ -38,7 +38,7 @@ public class InteractWithObject : MonoBehaviour
                 }
 
                 currentInteractable = value;
-                if (currentInteractable != null)
+                if (currentInteractable != null && currentInteractable.AllowInteraction)
                 {
                     currentInteractable.OnFocus();
                 }
@@ -89,7 +89,7 @@ public class InteractWithObject : MonoBehaviour
 
     public void OnInteract()
     {
-        if (CurrentInteractable != null)
+        if (CurrentInteractable != null && CurrentInteractable.AllowInteraction)
         {
             SetInputActive(false);
             CurrentInteractable.OnInteract();
