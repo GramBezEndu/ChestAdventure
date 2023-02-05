@@ -145,7 +145,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   glow: {fileID: 2100000, guid: 5f01c51661ec8424c92d1ea366054dc5, type: 2}
-  youNeedKeyPanel: {fileID: 6702806138475726793, guid: c64a239f95d84014abd97264949d7caf, type: 3}
+  nonInteractableLayer: 7
 --- !u!1 &4418080684490788484
 GameObject:
   m_ObjectHideFlags: 0

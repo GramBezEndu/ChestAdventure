@@ -14,6 +14,9 @@ public class WindowManager : MonoBehaviour
     public GameObject openConfirm;
 
     [SerializeField]
+    public GameObject takeKey;
+
+    [SerializeField]
     private InteractWithObject interactWithObject;
 
     public static WindowManager Instance => instance;
@@ -21,6 +24,8 @@ public class WindowManager : MonoBehaviour
     public GameObject OpenConfirm => openConfirm;
 
     public GameObject NeedKey => needKeyPanel;
+
+    public GameObject TakeKey => takeKey;
 
     public Interactable CurrentInteractable { get; private set; }
 
@@ -51,5 +56,8 @@ public class WindowManager : MonoBehaviour
     private void Awake()
     {
         instance = this;
+        needKeyPanel.SetActive(false);
+        openConfirm.SetActive(false);
+        takeKey.SetActive(false);
     }
 }

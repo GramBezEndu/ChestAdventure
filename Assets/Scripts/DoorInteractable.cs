@@ -20,4 +20,10 @@ public class DoorInteractable : Interactable
             windowManager.Open(windowManager.OpenConfirm, this);
         }
     }
+
+    public override void OnConfirm()
+    {
+        base.OnConfirm();
+        Debug.Log("End level!");
+    }
 }

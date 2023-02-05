@@ -7,6 +7,9 @@ public class Interactable : MonoBehaviour
     [SerializeField]
     private Material glow;
 
+    [SerializeField]
+    private int nonInteractableLayer;
+
     private new Renderer renderer;
 
     private Material original;
@@ -24,6 +27,12 @@ public class Interactable : MonoBehaviour
                 if (allowInteraction == false)
                 {
                     renderer.material = original;
+                    int layer = nonInteractableLayer;
+                    gameObject.layer = layer;
+                    foreach (Transform transform in gameObject.transform.GetComponentsInChildren<Transform>())
+                    {
+                        transform.gameObject.layer = layer;
+                    }
                 }
             }
         }

@@ -19,6 +19,9 @@ public class InteractWithObject : MonoBehaviour
     [SerializeField]
     private LayerMask interactionLayer;
 
+    [SerializeField]
+    private LayerMask nonInteractionLayer;
+
     private PlayerInput playerInput;
 
     private InputAction interactAction;
@@ -60,9 +63,11 @@ public class InteractWithObject : MonoBehaviour
             return;
         }
 
-        if (Physics.Raycast(camera.ViewportPointToRay(interactionRayPoint), out RaycastHit hit, interactDistance))
+        if (Physics.Raycast(camera.ViewportPointToRay(interactionRayPoint), out RaycastHit hit, interactDistance, ~nonInteractionLayer))
         {
-            if (hit.collider.gameObject.layer == (int)Mathf.Log(interactionLayer.value, 2))
+            Debug.Log(hit.collider.gameObject.name);
+
+            if (interactionLayer.IsLayerInMask(hit.collider.gameObject.layer))
             {
                 Interactable interactable = hit.collider.GetComponent<Interactable>();
                 if (!interactable)
