@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 475588}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: StrapAxis
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -42,7 +42,8 @@ GameObject:
   - component: {fileID: 431626}
   - component: {fileID: 13717092}
   - component: {fileID: 884448050}
-  m_Layer: 0
+  - component: {fileID: 8454870548450478179}
+  m_Layer: 6
   m_Name: ChestMesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -137,6 +138,18 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300000, guid: 63878c47173aa774687bf1dcb9a14938, type: 3}
+--- !u!114 &8454870548450478179
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 113350}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dffa6ccd031d7ad4f82fe3fed76fec12, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &116224
 GameObject:
   m_ObjectHideFlags: 0
@@ -146,7 +159,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 418294}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: LockAxis003
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -177,7 +190,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 470096}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: MainAxis
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -210,7 +223,7 @@ GameObject:
   m_Component:
   - component: {fileID: 461022}
   - component: {fileID: 11142086}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Chest
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -259,7 +272,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 410972}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: LockAxis002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -292,7 +305,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 449394}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Chest
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -325,7 +338,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 463846}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: LockAxis001
   m_TagString: Untagged
   m_Icon: {fileID: 0}

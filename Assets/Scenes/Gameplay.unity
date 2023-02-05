@@ -270,7 +270,7 @@ GameObject:
   - component: {fileID: 35084281}
   - component: {fileID: 35084280}
   m_Layer: 0
-  m_Name: Doors Manager
+  m_Name: Doors Generator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -815,6 +815,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 62434139, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
+      propertyPath: camera
+      value: 
+      objectReference: {fileID: 999671302}
     - target: {fileID: 8616685848737228372, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
       propertyPath: m_Name
       value: PlayerCapsule
@@ -7620,6 +7624,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerFollowCamera
       objectReference: {fileID: 0}
+    - target: {fileID: 8762286023885395077, guid: 9c489a8547f4d9e4387da15a4ff82c81, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8762286023885395322, guid: 9c489a8547f4d9e4387da15a4ff82c81, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -8794,7 +8802,7 @@ GameObject:
   - component: {fileID: 1589051459}
   - component: {fileID: 1589051458}
   m_Layer: 0
-  m_Name: Chest Manager
+  m_Name: Chest Generator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
