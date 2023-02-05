@@ -11,16 +11,21 @@ public class Interactable : MonoBehaviour
 
     private Material original;
 
-    public void OnFocus()
+    public virtual void OnFocus()
     {
         Debug.Log("Interactable.OnFocus()");
         renderer.material = glow;
     }
 
-    public void OnFocusLost()
+    public virtual void OnFocusLost()
     {
         Debug.Log("Interactable.OnFocusLost()");
         renderer.material = original;
+    }
+
+    public virtual void OnInteract()
+    {
+        Debug.Log("Interactable.OnInteract()");
     }
 
     private void Awake()

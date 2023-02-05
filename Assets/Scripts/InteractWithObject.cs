@@ -89,6 +89,36 @@ public class InteractWithObject : MonoBehaviour
 
     public void OnInteract()
     {
-        Debug.Log("OnInteract() called");
+        if (CurrentInteractable != null)
+        {
+            SetInputActive(false);
+            CurrentInteractable.OnInteract();
+        }
+    }
+
+    public void OnInteractionEnd()
+    {
+        Debug.Log("InteractWithObject.OnInteractionEnd()");
+    }
+
+    public void SetInputActive(bool inputActive)
+    {
+        bool mouseActive = !inputActive;
+        if (inputActive)
+        {
+            playerInput.ActivateInput();
+            SetCursorState(mouseActive);
+        }
+        else
+        {
+            playerInput.DeactivateInput();
+            SetCursorState(mouseActive);
+        }
+    }
+
+    private void SetCursorState(bool active)
+    {
+        Cursor.lockState = active ? CursorLockMode.None : CursorLockMode.Locked;
+        Cursor.visible = active;
     }
 }
