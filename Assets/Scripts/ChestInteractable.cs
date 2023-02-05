@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class ChestInteractable : Interactable
 {
-    public override void OnInteract()
+    public override void OnInteract(GameObject player)
     {
-        base.OnInteract();
+        base.OnInteract(player);
         WindowManager windowManager = WindowManager.Instance;
         windowManager.Open(windowManager.OpenConfirm, this);
     }

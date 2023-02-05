@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class KeyInteractable : Interactable
 {
-    public override void OnInteract()
+    public override void OnInteract(GameObject player)
     {
-        base.OnInteract();
+        base.OnInteract(player);
         WindowManager windowManager = WindowManager.Instance;
         windowManager.Open(windowManager.TakeKey, this);
     }
@@ -15,6 +15,8 @@ public class KeyInteractable : Interactable
     {
         base.OnConfirm();
         AllowInteraction = false;
+        Inventory inventory = Player.GetComponent<Inventory>();
+        inventory.AcquiredKey = true;
         Destroy(gameObject);
     }
 }

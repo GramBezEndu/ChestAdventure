@@ -65,8 +65,6 @@ public class InteractWithObject : MonoBehaviour
 
         if (Physics.Raycast(camera.ViewportPointToRay(interactionRayPoint), out RaycastHit hit, interactDistance, ~nonInteractionLayer))
         {
-            Debug.Log(hit.collider.gameObject.name);
-
             if (interactionLayer.IsLayerInMask(hit.collider.gameObject.layer))
             {
                 Interactable interactable = hit.collider.GetComponent<Interactable>();
@@ -97,13 +95,8 @@ public class InteractWithObject : MonoBehaviour
         if (CurrentInteractable != null && CurrentInteractable.AllowInteraction)
         {
             SetInputActive(false);
-            CurrentInteractable.OnInteract();
+            CurrentInteractable.OnInteract(gameObject);
         }
-    }
-
-    public void OnInteractionEnd()
-    {
-        Debug.Log("InteractWithObject.OnInteractionEnd()");
     }
 
     public void SetInputActive(bool inputActive)

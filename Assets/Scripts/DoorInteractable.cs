@@ -4,14 +4,12 @@ using UnityEngine;
 
 public class DoorInteractable : Interactable
 {
-    // TODO: Implement player inventory check
-    private bool hasKey = false;
-
-    public override void OnInteract()
+    public override void OnInteract(GameObject player)
     {
-        base.OnInteract();
+        base.OnInteract(player);
         WindowManager windowManager = WindowManager.Instance;
-        if (!hasKey)
+        Inventory inventory = player.GetComponent<Inventory>();
+        if (!inventory.AcquiredKey)
         {
             windowManager.Open(windowManager.NeedKey, this);
         }
@@ -24,6 +22,7 @@ public class DoorInteractable : Interactable
     public override void OnConfirm()
     {
         base.OnConfirm();
+        AllowInteraction = false;
         Debug.Log("End level!");
     }
 }

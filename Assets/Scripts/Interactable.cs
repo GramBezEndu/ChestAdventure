@@ -37,6 +37,9 @@ public class Interactable : MonoBehaviour
             }
         }
     }
+
+    public GameObject Player { get; private set; }
+
     public virtual void OnFocus()
     {
         Debug.Log("Interactable.OnFocus()");
@@ -49,8 +52,9 @@ public class Interactable : MonoBehaviour
         renderer.material = original;
     }
 
-    public virtual void OnInteract()
+    public virtual void OnInteract(GameObject player)
     {
+        Player = player;
         Debug.Log("Interactable.OnInteract()");
     }
 
