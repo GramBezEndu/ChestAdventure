@@ -10,18 +10,31 @@ public class WindowManager : MonoBehaviour
     private GameObject needKeyPanel;
 
     [SerializeField]
+    public GameObject openDoor;
+
+    [SerializeField]
     private InteractWithObject interactWithObject;
 
     public static WindowManager Instance => instance;
 
     public void ToggleNeedKey()
     {
-        needKeyPanel.SetActive(!needKeyPanel.activeInHierarchy);
-        interactWithObject.SetInputActive(!needKeyPanel.activeInHierarchy);
+        TogglePanel(needKeyPanel);
+    }
+
+    public void ToogleOpenDoor()
+    {
+        TogglePanel(openDoor);
     }
 
     private void Awake()
     {
         instance = this;
+    }
+
+    public void TogglePanel(GameObject panel)
+    {
+        panel.SetActive(!panel.activeInHierarchy);
+        interactWithObject.SetInputActive(!panel.activeInHierarchy);
     }
 }
