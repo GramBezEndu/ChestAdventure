@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DoorGenerator : MonoBehaviour
+public class ObjectGenerator : MonoBehaviour
 {
     [SerializeField]
     private GameObject[] objects;
@@ -22,6 +22,10 @@ public class DoorGenerator : MonoBehaviour
             else
             {
                 objects[i].SetActive(false);
+                if (replacementPrefab != null)
+                {
+                    Instantiate(replacementPrefab, objects[i].transform.position, objects[i].transform.rotation);
+                }
             }
         }
     }
