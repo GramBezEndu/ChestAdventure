@@ -23,6 +23,29 @@ public class InteractWithObject : MonoBehaviour
 
     private InputAction interactAction;
 
+    private Interactable currentInteractable;
+
+    public Interactable CurrentInteractable
+    {
+        get => currentInteractable;
+        private set
+        {
+            if (currentInteractable != value)
+            {
+                if (currentInteractable != null)
+                {
+                    currentInteractable.OnFocusLost();
+                }
+
+                currentInteractable = value;
+                if (currentInteractable != null)
+                {
+                    currentInteractable.OnFocus();
+                }
+            }
+        }
+    }
+
     public void Update()
     {
         if (playerInput == null)
@@ -31,24 +54,36 @@ public class InteractWithObject : MonoBehaviour
             interactAction = playerInput.actions["interact"];
         }
 
-        if (interactAction != null)
+        if (interactAction == null)
         {
-            if (Physics.Raycast(camera.ViewportPointToRay(interactionRayPoint), out RaycastHit hit, interactDistance))
+            Debug.LogError("Interactable action is null!");
+            return;
+        }
+
+        if (Physics.Raycast(camera.ViewportPointToRay(interactionRayPoint), out RaycastHit hit, interactDistance))
+        {
+            if (hit.collider.gameObject.layer == (int)Mathf.Log(interactionLayer.value, 2))
             {
-                if (hit.collider.gameObject.layer == (int)Mathf.Log(interactionLayer.value, 2))
+                Interactable interactable = hit.collider.GetComponent<Interactable>();
+                if (!interactable)
                 {
-                    Debug.Log("Looking at interactable");
-                    Interactable interactable = hit.collider.GetComponent<Interactable>();
-                    if (interactable)
-                    {
-                        interactable.OnFocus();
-                    }
-                    else
-                    {
-                        Debug.LogError("Interactable script was not found!");
-                    }
+                    Debug.LogError("Interactable script was not found!");
+                    return;
+                }
+
+                if (CurrentInteractable == null || hit.collider.gameObject.GetInstanceID() == CurrentInteractable.gameObject.GetInstanceID())
+                {
+                    CurrentInteractable = interactable;
                 }
             }
+            else
+            {
+                CurrentInteractable = null;
+            }
+        }
+        else
+        {
+            CurrentInteractable = null;
         }
     }
 

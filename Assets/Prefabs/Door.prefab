@@ -144,6 +144,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dffa6ccd031d7ad4f82fe3fed76fec12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  glow: {fileID: 2100000, guid: 5f01c51661ec8424c92d1ea366054dc5, type: 2}
 --- !u!1 &4418080684490788484
 GameObject:
   m_ObjectHideFlags: 0
@@ -156,7 +157,7 @@ GameObject:
   - component: {fileID: 7728634312807778038}
   - component: {fileID: 6914483447692646098}
   - component: {fileID: 7867433288406770408}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Door Frame
   m_TagString: Untagged
   m_Icon: {fileID: 0}

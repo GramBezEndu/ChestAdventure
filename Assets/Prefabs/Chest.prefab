@@ -150,6 +150,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dffa6ccd031d7ad4f82fe3fed76fec12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  glow: {fileID: 2100000, guid: 5f01c51661ec8424c92d1ea366054dc5, type: 2}
 --- !u!1 &116224
 GameObject:
   m_ObjectHideFlags: 0
