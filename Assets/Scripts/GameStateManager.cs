@@ -22,7 +22,13 @@ public class GameStateManager : MonoBehaviour
     private TextMeshProUGUI bestTimeText;
 
     [SerializeField]
+    private GameObject player;
+
     private InteractWithObject interactWithObject;
+
+    private Vector3 spawnPoint;
+
+    private Quaternion spawnRotation;
 
     private GameTimer gameTimer;
 
@@ -41,13 +47,14 @@ public class GameStateManager : MonoBehaviour
     {
         timer.SetActive(true);
         gameTimer.Restart();
-        gameObject.SetActive(false);
+        gameOver.SetActive(false);
         interactWithObject.SetInputActive(true);
-    }
-
-    private void HideTimer()
-    {
-        timer.SetActive(false);
+        player.GetComponent<CharacterController>().enabled = false;
+        player.transform.position = spawnPoint;
+        player.transform.rotation = spawnRotation;
+        Debug.Log("position after teleport: " + player.gameObject.transform.position);
+        player.GetComponent<CharacterController>().enabled = true;
+        player.GetComponent<Inventory>().AcquiredKey = false;
     }
 
     private void ShowGameOverScreen()
@@ -61,10 +68,19 @@ public class GameStateManager : MonoBehaviour
         bestTimeText.text = "Best time: " + GameTimer.FormatTime(TimeSpan.FromSeconds(bestTime));
     }
 
+    private void HideTimer()
+    {
+        timer.SetActive(false);
+    }
+
     private void Awake()
     {
         instance = this;
         gameTimer = timer.GetComponent<GameTimer>();
+        interactWithObject = player.GetComponent<InteractWithObject>();
+        spawnPoint = player.transform.position;
+        spawnRotation = player.transform.rotation;
+        Debug.Log("Spawn point: " + spawnPoint);
     }
 
     private void LateUpdate()
