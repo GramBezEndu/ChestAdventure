@@ -101,16 +101,28 @@ public class InteractWithObject : MonoBehaviour
 
     public void SetInputActive(bool inputActive)
     {
+        SetPlayerInput(inputActive);
         bool mouseActive = !inputActive;
+        Debug.Log("Mouse active: " + mouseActive);
         if (inputActive)
         {
-            playerInput.ActivateInput();
             SetCursorState(mouseActive);
         }
         else
         {
-            playerInput.DeactivateInput();
             SetCursorState(mouseActive);
+        }
+
+        void SetPlayerInput(bool active)
+        {
+            if (active)
+            {
+                playerInput.ActivateInput();
+            }
+            else
+            {
+                playerInput.DeactivateInput();
+            }
         }
     }
 
