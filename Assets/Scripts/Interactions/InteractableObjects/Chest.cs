@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ChestInteractable : Interactable
+public class Chest : Interactable
 {
     public override void OnInteract(GameObject player)
     {

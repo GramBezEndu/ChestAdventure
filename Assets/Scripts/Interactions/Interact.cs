@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(PlayerInput))]
-public class InteractWithObject : MonoBehaviour
+public class Interact : MonoBehaviour
 {
     [SerializeField]
     private new Camera camera;

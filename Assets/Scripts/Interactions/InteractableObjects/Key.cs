@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class KeyInteractable : Interactable
+public class Key : Interactable
 {
     public override void OnInteract(GameObject player)
     {

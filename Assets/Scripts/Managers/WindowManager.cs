@@ -17,7 +17,7 @@ public class WindowManager : MonoBehaviour
     public GameObject takeKey;
 
     [SerializeField]
-    private InteractWithObject interactWithObject;
+    private Interact interactWithObject;
 
     public static WindowManager Instance => instance;
 

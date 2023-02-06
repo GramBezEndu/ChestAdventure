@@ -41,7 +41,7 @@ public class GameStateManager : MonoBehaviour
     [SerializeField]
     private ShowBestTime showBestTime;
 
-    private InteractWithObject interactWithObject;
+    private Interact interactWithObject;
 
     private Vector3 spawnPoint;
 
@@ -111,7 +111,7 @@ public class GameStateManager : MonoBehaviour
         mainMenu.SetActive(true);
         level.SetActive(false);
         gameTimer = timer.GetComponent<GameTimer>();
-        interactWithObject = player.GetComponent<InteractWithObject>();
+        interactWithObject = player.GetComponent<Interact>();
         spawnPoint = player.transform.position;
         spawnRotation = player.transform.rotation;
         Debug.Log("Spawn point: " + spawnPoint);
