@@ -7,6 +7,8 @@ using UnityEngine;
 
 public class GameStateManager : MonoBehaviour
 {
+    private const string BestTimeIdentifier = "BestTime";
+
     private static GameStateManager instance;
 
     [SerializeField]
@@ -35,6 +37,9 @@ public class GameStateManager : MonoBehaviour
 
     [SerializeField]
     private GameObject mainMenu;
+
+    [SerializeField]
+    private ShowBestTime showBestTime;
 
     private InteractWithObject interactWithObject;
 
@@ -66,7 +71,6 @@ public class GameStateManager : MonoBehaviour
         player.GetComponent<CharacterController>().enabled = false;
         player.transform.position = spawnPoint;
         player.transform.rotation = spawnRotation;
-        Debug.Log("position after teleport: " + player.gameObject.transform.position);
         player.GetComponent<CharacterController>().enabled = true;
         player.GetComponent<Inventory>().AcquiredKey = false;
 
@@ -86,6 +90,7 @@ public class GameStateManager : MonoBehaviour
         completionTimes.Sort();
         float bestTime = completionTimes[0];
         bestTimeText.text = "Best time: " + GameTimer.FormatTime(TimeSpan.FromSeconds(bestTime));
+        PlayerPrefs.SetFloat(BestTimeIdentifier, bestTime);
     }
 
     private void HideTimer()
@@ -96,6 +101,13 @@ public class GameStateManager : MonoBehaviour
     private void Awake()
     {
         instance = this;
+        if (PlayerPrefs.HasKey(BestTimeIdentifier))
+        {
+            float bestTime = PlayerPrefs.GetFloat(BestTimeIdentifier);
+            completionTimes.Add(bestTime);
+            showBestTime.Time = bestTime;
+        }
+
         mainMenu.SetActive(true);
         level.SetActive(false);
         gameTimer = timer.GetComponent<GameTimer>();
