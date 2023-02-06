@@ -16,10 +16,7 @@ public class GameStateManager : MonoBehaviour
     private Gameplay gameplay;
 
     [SerializeField]
-    private GameObject mainMenu;
-
-    [SerializeField]
-    private ShowBestTime showBestTime;
+    private MainMenu mainMenu;
 
     private bool gameplayEndRequested;
 
@@ -34,9 +31,9 @@ public class GameStateManager : MonoBehaviour
 
     public void RestartGame()
     {
-        mainMenu.SetActive(false);
-        gameplay.StartGame();
+        mainMenu.Hide();
         gameOver.Hide();
+        gameplay.StartGame();
     }
 
     private void ShowGameOverScreen()
@@ -57,10 +54,9 @@ public class GameStateManager : MonoBehaviour
         if (Save.HasBestTime())
         {
             bestTime = Save.GetBestTime();
-            showBestTime.Time = bestTime;
         }
 
-        mainMenu.SetActive(true);
+        mainMenu.Show();
     }
 
     private void LateUpdate()
