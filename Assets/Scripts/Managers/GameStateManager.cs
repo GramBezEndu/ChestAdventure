@@ -9,37 +9,20 @@ public class GameStateManager : MonoBehaviour
 
     private static GameStateManager instance;
 
-    private readonly List<float> completionTimes = new List<float>();
-
     [SerializeField]
     private GameOver gameOver;
 
     [SerializeField]
+    private Gameplay gameplay;
+
+    [SerializeField]
     private GameObject timer;
-
-    [SerializeField]
-    private GameObject player;
-
-    [SerializeField]
-    private ObjectGenerator chestGenerator;
-
-    [SerializeField]
-    private ObjectGenerator doorGenerator;
-
-    [SerializeField]
-    private GameObject level;
 
     [SerializeField]
     private GameObject mainMenu;
 
     [SerializeField]
     private ShowBestTime showBestTime;
-
-    private Interact interactWithObject;
-
-    private Vector3 spawnPoint;
-
-    private Quaternion spawnRotation;
 
     private GameTimer gameTimer;
 
@@ -57,21 +40,8 @@ public class GameStateManager : MonoBehaviour
     public void RestartGame()
     {
         mainMenu.SetActive(false);
-        level.SetActive(true);
-        timer.SetActive(true);
-        gameTimer.Restart();
+        gameplay.StartGame();
         gameOver.Hide();
-        interactWithObject.SetInputActive(true);
-        player.GetComponent<CharacterController>().enabled = false;
-        player.transform.SetPositionAndRotation(spawnPoint, spawnRotation);
-        player.GetComponent<CharacterController>().enabled = true;
-        player.GetComponent<Inventory>().AcquiredKey = false;
-
-        chestGenerator.RestoreUsedObject();
-        chestGenerator.Generate();
-
-        doorGenerator.RestoreUsedObject();
-        doorGenerator.Generate();
     }
 
     private void ShowGameOverScreen()
@@ -96,18 +66,12 @@ public class GameStateManager : MonoBehaviour
         instance = this;
         if (Save.HasBestTime())
         {
-            float bestTime = Save.GetBestTime();
-            completionTimes.Add(bestTime);
+            bestTime = Save.GetBestTime();
             showBestTime.Time = bestTime;
         }
 
         mainMenu.SetActive(true);
-        level.SetActive(false);
         gameTimer = timer.GetComponent<GameTimer>();
-        interactWithObject = player.GetComponent<Interact>();
-        spawnPoint = player.transform.position;
-        spawnRotation = player.transform.rotation;
-        Debug.Log("Spawn point: " + spawnPoint);
     }
 
     private void LateUpdate()
@@ -115,7 +79,7 @@ public class GameStateManager : MonoBehaviour
         if (gameOverRequested)
         {
             Debug.Log("GameStateManager.GameOver()");
-            interactWithObject.SetInputActive(false);
+            gameplay.EndGame();
             HideTimer();
             ShowGameOverScreen();
 
