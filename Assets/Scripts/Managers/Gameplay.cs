@@ -34,23 +34,32 @@ public class Gameplay : MonoBehaviour
         level.SetActive(true);
         timerDisplay.SetActive(true);
         GameTimer.Restart();
-        characterController.enabled = false;
-        player.transform.SetPositionAndRotation(spawnPoint, spawnRotation);
-        characterController.enabled = true;
+        TeleportPlayerToSpawn();
         inventory.AcquiredKey = false;
-
-        chestGenerator.RestoreUsedObject();
-        chestGenerator.Generate();
-
-        doorGenerator.RestoreUsedObject();
-        doorGenerator.Generate();
+        RegenerateMap();
         Interact.SetInputActive(true);
     }
 
     public void EndGame()
     {
+        Debug.Log("Gameplay.EndGame()");
         Interact.SetInputActive(false);
         timerDisplay.SetActive(false);
+    }
+
+    private void TeleportPlayerToSpawn()
+    {
+        characterController.enabled = false;
+        player.transform.SetPositionAndRotation(spawnPoint, spawnRotation);
+        characterController.enabled = true;
+    }
+
+    private void RegenerateMap()
+    {
+        chestGenerator.RestoreUsedObject();
+        chestGenerator.Generate();
+        doorGenerator.RestoreUsedObject();
+        doorGenerator.Generate();
     }
 
     private void Awake()

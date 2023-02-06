@@ -23,22 +23,12 @@ public class ObjectGenerator : MonoBehaviour
             if (i == drawnIndex)
             {
                 objects[i].SetActive(true);
-                if (replacements[i] != null)
-                {
-                    Destroy(replacements[i]);
-                }
+                DestroyReplacementIfExists(i);
             }
             else
             {
                 objects[i].SetActive(false);
-                if (replacementPrefab != null)
-                {
-                    if (replacements[i] == null)
-                    {
-                        replacements[i] = 
-                            Instantiate(replacementPrefab, objects[i].transform.position, objects[i].transform.rotation);
-                    }
-                }
+                RestoreReplacementIfNecessary(i);
             }
         }
     }
@@ -51,6 +41,26 @@ public class ObjectGenerator : MonoBehaviour
         Destroy(usedObject);
         objects[drawnIndex] = Instantiate(objectPrefab, position, rotation);
         objects[drawnIndex].SetActive(false);
+    }
+
+    private void RestoreReplacementIfNecessary(int i)
+    {
+        if (replacementPrefab != null)
+        {
+            if (replacements[i] == null)
+            {
+                replacements[i] =
+                    Instantiate(replacementPrefab, objects[i].transform.position, objects[i].transform.rotation);
+            }
+        }
+    }
+
+    private void DestroyReplacementIfExists(int i)
+    {
+        if (replacements[i] != null)
+        {
+            Destroy(replacements[i]);
+        }
     }
 
     private void Awake()

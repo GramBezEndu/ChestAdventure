@@ -1,12 +1,7 @@
-using System;
-using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 
 public class GameStateManager : MonoBehaviour
 {
-    private const string BestTimeIdentifier = "BestTime";
-
     private static GameStateManager instance;
 
     [SerializeField]
@@ -44,7 +39,7 @@ public class GameStateManager : MonoBehaviour
             bestTime = finalTime;
         }
 
-        PlayerPrefs.SetFloat(BestTimeIdentifier, bestTime);
+        Save.SaveBestTime(bestTime);
         gameOver.Show(finalTime, bestTime);
     }
 
@@ -63,7 +58,6 @@ public class GameStateManager : MonoBehaviour
     {
         if (gameplayEndRequested)
         {
-            Debug.Log("GameStateManager.GameOver()");
             gameplay.EndGame();
             ShowGameOverScreen();
 
