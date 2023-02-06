@@ -12,16 +12,10 @@ public class GameStateManager : MonoBehaviour
     private readonly List<float> completionTimes = new List<float>();
 
     [SerializeField]
-    private GameObject gameOver;
+    private GameOver gameOver;
 
     [SerializeField]
     private GameObject timer;
-
-    [SerializeField]
-    private TextMeshProUGUI finalTimeText;
-
-    [SerializeField]
-    private TextMeshProUGUI bestTimeText;
 
     [SerializeField]
     private GameObject player;
@@ -51,6 +45,8 @@ public class GameStateManager : MonoBehaviour
 
     private bool gameOverRequested;
 
+    private float bestTime = float.MaxValue;
+
     public static GameStateManager Instance => instance;
 
     public void RequestGameOver()
@@ -64,7 +60,7 @@ public class GameStateManager : MonoBehaviour
         level.SetActive(true);
         timer.SetActive(true);
         gameTimer.Restart();
-        gameOver.SetActive(false);
+        gameOver.Hide();
         interactWithObject.SetInputActive(true);
         player.GetComponent<CharacterController>().enabled = false;
         player.transform.SetPositionAndRotation(spawnPoint, spawnRotation);
@@ -80,14 +76,14 @@ public class GameStateManager : MonoBehaviour
 
     private void ShowGameOverScreen()
     {
-        gameOver.SetActive(true);
         float finalTime = gameTimer.Time;
-        finalTimeText.text = "Final time: " + GameTimer.FormatTime(TimeSpan.FromSeconds(finalTime));
-        completionTimes.Add(finalTime);
-        completionTimes.Sort();
-        float bestTime = completionTimes[0];
-        bestTimeText.text = "Best time: " + GameTimer.FormatTime(TimeSpan.FromSeconds(bestTime));
+        if (finalTime < bestTime)
+        {
+            bestTime = finalTime;
+        }
+
         PlayerPrefs.SetFloat(BestTimeIdentifier, bestTime);
+        gameOver.Show(finalTime, bestTime);
     }
 
     private void HideTimer()
@@ -98,9 +94,9 @@ public class GameStateManager : MonoBehaviour
     private void Awake()
     {
         instance = this;
-        if (PlayerPrefs.HasKey(BestTimeIdentifier))
+        if (Save.HasBestTime())
         {
-            float bestTime = PlayerPrefs.GetFloat(BestTimeIdentifier);
+            float bestTime = Save.GetBestTime();
             completionTimes.Add(bestTime);
             showBestTime.Time = bestTime;
         }
