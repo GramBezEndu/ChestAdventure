@@ -16,25 +16,20 @@ public class GameStateManager : MonoBehaviour
     private Gameplay gameplay;
 
     [SerializeField]
-    private GameObject timer;
-
-    [SerializeField]
     private GameObject mainMenu;
 
     [SerializeField]
     private ShowBestTime showBestTime;
 
-    private GameTimer gameTimer;
-
-    private bool gameOverRequested;
+    private bool gameplayEndRequested;
 
     private float bestTime = float.MaxValue;
 
     public static GameStateManager Instance => instance;
 
-    public void RequestGameOver()
+    public void RequestGameplayEnd()
     {
-        gameOverRequested = true;
+        gameplayEndRequested = true;
     }
 
     public void RestartGame()
@@ -46,7 +41,7 @@ public class GameStateManager : MonoBehaviour
 
     private void ShowGameOverScreen()
     {
-        float finalTime = gameTimer.Time;
+        float finalTime = gameplay.GameTimer.Time;
         if (finalTime < bestTime)
         {
             bestTime = finalTime;
@@ -54,11 +49,6 @@ public class GameStateManager : MonoBehaviour
 
         PlayerPrefs.SetFloat(BestTimeIdentifier, bestTime);
         gameOver.Show(finalTime, bestTime);
-    }
-
-    private void HideTimer()
-    {
-        timer.SetActive(false);
     }
 
     private void Awake()
@@ -71,19 +61,17 @@ public class GameStateManager : MonoBehaviour
         }
 
         mainMenu.SetActive(true);
-        gameTimer = timer.GetComponent<GameTimer>();
     }
 
     private void LateUpdate()
     {
-        if (gameOverRequested)
+        if (gameplayEndRequested)
         {
             Debug.Log("GameStateManager.GameOver()");
             gameplay.EndGame();
-            HideTimer();
             ShowGameOverScreen();
 
-            gameOverRequested = false;
+            gameplayEndRequested = false;
         }
     }
 }

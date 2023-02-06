@@ -17,8 +17,6 @@ public class Gameplay : MonoBehaviour
     [SerializeField]
     private GameObject level;
 
-    private GameTimer gameTimer;
-
     private Vector3 spawnPoint;
 
     private Quaternion spawnRotation;
@@ -27,13 +25,15 @@ public class Gameplay : MonoBehaviour
 
     private Inventory inventory;
 
+    public GameTimer GameTimer { get; private set; }
+
     public Interact Interact { get; private set; }
 
     public void StartGame()
     {
         level.SetActive(true);
         timerDisplay.SetActive(true);
-        gameTimer.Restart();
+        GameTimer.Restart();
         characterController.enabled = false;
         player.transform.SetPositionAndRotation(spawnPoint, spawnRotation);
         characterController.enabled = true;
@@ -50,12 +50,13 @@ public class Gameplay : MonoBehaviour
     public void EndGame()
     {
         Interact.SetInputActive(false);
+        timerDisplay.SetActive(false);
     }
 
     private void Awake()
     {
         level.SetActive(false);
-        gameTimer = timerDisplay.GetComponent<GameTimer>();
+        GameTimer = timerDisplay.GetComponent<GameTimer>();
         Interact = player.GetComponent<Interact>();
         characterController = player.GetComponent<CharacterController>();
         inventory = player.GetComponent<Inventory>();

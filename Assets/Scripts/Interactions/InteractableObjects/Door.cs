@@ -22,6 +22,6 @@ public class Door : Interactable
         base.OnConfirm();
         AllowInteraction = false;
         Debug.Log("End level!");
-        GameStateManager.Instance.RequestGameOver();
+        GameStateManager.Instance.RequestGameplayEnd();
     }
 }
