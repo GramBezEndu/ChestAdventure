@@ -24,6 +24,12 @@ public class GameStateManager : MonoBehaviour
     [SerializeField]
     private GameObject player;
 
+    [SerializeField]
+    private ObjectGenerator chestGenerator;
+
+    [SerializeField]
+    private ObjectGenerator doorGenerator;
+
     private InteractWithObject interactWithObject;
 
     private Vector3 spawnPoint;
@@ -55,6 +61,12 @@ public class GameStateManager : MonoBehaviour
         Debug.Log("position after teleport: " + player.gameObject.transform.position);
         player.GetComponent<CharacterController>().enabled = true;
         player.GetComponent<Inventory>().AcquiredKey = false;
+
+        chestGenerator.Restore();
+        chestGenerator.Generate();
+
+        doorGenerator.Restore();
+        doorGenerator.Generate();
     }
 
     private void ShowGameOverScreen()

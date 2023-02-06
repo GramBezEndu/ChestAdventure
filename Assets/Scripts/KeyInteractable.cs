@@ -17,6 +17,6 @@ public class KeyInteractable : Interactable
         AllowInteraction = false;
         Inventory inventory = Player.GetComponent<Inventory>();
         inventory.AcquiredKey = true;
-        Destroy(gameObject);
+        gameObject.SetActive(false);
     }
 }
