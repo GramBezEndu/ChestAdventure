@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class WindowManager : MonoBehaviour
@@ -11,10 +8,10 @@ public class WindowManager : MonoBehaviour
     private GameObject needKeyPanel;
 
     [SerializeField]
-    public GameObject openConfirm;
+    private GameObject openConfirm;
 
     [SerializeField]
-    public GameObject takeKey;
+    private GameObject takeKey;
 
     [SerializeField]
     private Interact interactWithObject;

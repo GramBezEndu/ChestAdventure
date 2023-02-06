@@ -1,7 +1,5 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using TMPro;
 using UnityEngine;
 
@@ -10,6 +8,8 @@ public class GameStateManager : MonoBehaviour
     private const string BestTimeIdentifier = "BestTime";
 
     private static GameStateManager instance;
+
+    private readonly List<float> completionTimes = new List<float>();
 
     [SerializeField]
     private GameObject gameOver;
@@ -51,8 +51,6 @@ public class GameStateManager : MonoBehaviour
 
     private bool gameOverRequested;
 
-    private List<float> completionTimes = new List<float>();
-
     public static GameStateManager Instance => instance;
 
     public void RequestGameOver()
@@ -69,15 +67,14 @@ public class GameStateManager : MonoBehaviour
         gameOver.SetActive(false);
         interactWithObject.SetInputActive(true);
         player.GetComponent<CharacterController>().enabled = false;
-        player.transform.position = spawnPoint;
-        player.transform.rotation = spawnRotation;
+        player.transform.SetPositionAndRotation(spawnPoint, spawnRotation);
         player.GetComponent<CharacterController>().enabled = true;
         player.GetComponent<Inventory>().AcquiredKey = false;
 
-        chestGenerator.Restore();
+        chestGenerator.RestoreUsedObject();
         chestGenerator.Generate();
 
-        doorGenerator.Restore();
+        doorGenerator.RestoreUsedObject();
         doorGenerator.Generate();
     }
 

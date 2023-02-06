@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ObjectGenerator : MonoBehaviour
@@ -45,25 +43,14 @@ public class ObjectGenerator : MonoBehaviour
         }
     }
 
-    public void Restore()
+    public void RestoreUsedObject()
     {
-        RestoreUsedObject();
-        HandleReplacementPrefabs();
-
-        void RestoreUsedObject()
-        {
-            GameObject usedObject = objects[drawnIndex];
-            Vector3 position = usedObject.transform.position;
-            Quaternion rotation = usedObject.transform.rotation;
-            Destroy(usedObject);
-            objects[drawnIndex] = Instantiate(objectPrefab, position, rotation);
-            objects[drawnIndex].SetActive(false);
-        }
-
-        void HandleReplacementPrefabs()
-        {
-
-        }
+        GameObject usedObject = objects[drawnIndex];
+        Vector3 position = usedObject.transform.position;
+        Quaternion rotation = usedObject.transform.rotation;
+        Destroy(usedObject);
+        objects[drawnIndex] = Instantiate(objectPrefab, position, rotation);
+        objects[drawnIndex].SetActive(false);
     }
 
     private void Awake()
