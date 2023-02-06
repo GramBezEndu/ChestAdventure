@@ -1,4 +1,5 @@
 using Cinemachine;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -24,8 +25,6 @@ public class InteractWithObject : MonoBehaviour
 
     private PlayerInput playerInput;
 
-    private InputAction interactAction;
-
     private Interactable currentInteractable;
 
     public Interactable CurrentInteractable
@@ -49,20 +48,27 @@ public class InteractWithObject : MonoBehaviour
         }
     }
 
+    public PlayerInput PlayerInput
+    {
+        get
+        {
+            if (playerInput != null)
+            {
+                return playerInput;
+            }
+
+            playerInput = GetComponent<PlayerInput>();
+            if (playerInput == null)
+            {
+                throw new InvalidOperationException("Player input is not accessible");
+            }
+
+            return playerInput;
+        }
+    }
+
     public void Update()
     {
-        if (playerInput == null)
-        {
-            playerInput = GetComponent<PlayerInput>();
-            interactAction = playerInput.actions["interact"];
-        }
-
-        if (interactAction == null)
-        {
-            Debug.LogError("Interactable action is null!");
-            return;
-        }
-
         if (Physics.Raycast(camera.ViewportPointToRay(interactionRayPoint), out RaycastHit hit, interactDistance, ~nonInteractionLayer))
         {
             if (interactionLayer.IsLayerInMask(hit.collider.gameObject.layer))
@@ -117,11 +123,11 @@ public class InteractWithObject : MonoBehaviour
         {
             if (active)
             {
-                playerInput.ActivateInput();
+                PlayerInput.ActivateInput();
             }
             else
             {
-                playerInput.DeactivateInput();
+                PlayerInput.DeactivateInput();
             }
         }
     }

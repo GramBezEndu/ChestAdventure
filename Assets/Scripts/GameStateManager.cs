@@ -30,6 +30,12 @@ public class GameStateManager : MonoBehaviour
     [SerializeField]
     private ObjectGenerator doorGenerator;
 
+    [SerializeField]
+    private GameObject level;
+
+    [SerializeField]
+    private GameObject mainMenu;
+
     private InteractWithObject interactWithObject;
 
     private Vector3 spawnPoint;
@@ -51,6 +57,8 @@ public class GameStateManager : MonoBehaviour
 
     public void RestartGame()
     {
+        mainMenu.SetActive(false);
+        level.SetActive(true);
         timer.SetActive(true);
         gameTimer.Restart();
         gameOver.SetActive(false);
@@ -88,6 +96,8 @@ public class GameStateManager : MonoBehaviour
     private void Awake()
     {
         instance = this;
+        mainMenu.SetActive(true);
+        level.SetActive(false);
         gameTimer = timer.GetComponent<GameTimer>();
         interactWithObject = player.GetComponent<InteractWithObject>();
         spawnPoint = player.transform.position;
